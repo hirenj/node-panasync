@@ -11,6 +11,7 @@
   "dependencies": {
     "body-parser": "^1.13.3",
     "express": "^4.13.3",
+    "linux-mountutils": "^1.0.0",
     "minimist": "^1.1.2",
     "nconf": "^0.7.2",
     "request": "^2.60.0",
