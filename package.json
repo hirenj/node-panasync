@@ -1,0 +1,19 @@
+{
+  "name": "node-lumix",
+  "version": "0.0.1",
+  "description": "",
+  "main": "lumix",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.13.3",
+    "express": "^4.13.3",
+    "minimist": "^1.1.2",
+    "nconf": "^0.7.2",
+    "request": "^2.60.0",
+    "xml2js": "^0.4.9"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "name": "LUMIX importer",
+  "short_name": "LUMIX",
+  "icons": [{
+        "src": "images/icon-128x128.png",
+        "sizes": "128x128"
+      }, {
+        "src": "images/icon-152x152.png",
+        "sizes": "152x152"
+      }, {
+        "src": "images/icon-144x144.png",
+        "sizes": "144x144"
+      }, {
+        "src": "images/icon-192x192.png",
+        "sizes": "192x192"
+      }],
+  "start_url": "/index.html",
+  "display": "standalone",
+  "gcm_sender_id": "61508464601",
+  "gcm_user_visible_only": true
+}

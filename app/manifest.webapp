@@ -1,0 +1,25 @@
+{
+  "version": "1.0.0",
+  "name": "LUMIX image importer",
+  "launch_path": "/index.html",
+  "description": "Nodejs based importer for LUMIX cameras",
+  "icons": {
+    "128": "/images/icon-128x128.png"
+  },
+  "developer": {
+    "name": "",
+    "url": ""
+  },
+  "installs_allowed_from": [
+    "*"
+  ],
+  "default_locale": "en",
+  "permissions": {
+  },
+  "locales": {
+    "en": {
+      "name": "LUMIX image importer",
+      "description": "Nodejs based importer for LUMIX cameras"
+    }
+  }
+}
