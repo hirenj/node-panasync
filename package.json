@@ -1,13 +1,13 @@
 {
-  "name": "node-lumix",
+  "name": "node-panasync",
   "version": "0.0.1",
   "description": "",
-  "main": "lumix",
+  "main": "panasync",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
-  "license": "ISC",
+  "license": "",
   "dependencies": {
     "body-parser": "^1.13.3",
     "express": "^4.13.3",
