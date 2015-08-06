@@ -199,7 +199,9 @@ var downloadPhotos = function(photos) {
   }).on('data',function(chunk) {
     cur += chunk.length;
     self.current_complete = (100.0 * cur / len).toFixed(2);
-    console.log("Downloading " + self.current_complete + "% ");
+    if (self.current_complete % 25 == 0) {
+      console.log("Downloading " + self.current_complete + "% ");
+    }
   })
   .pipe(writer);
 
