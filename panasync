@@ -88,9 +88,7 @@ if (nconf.get('nas')) {
   camera.enabled = true;
 }
 
-
-
 // Fire up the server ----------------------------------------------------------
-// var server = app.listen(port, function() {
-//     console.log('Listening on port %d', server.address().port);
-// });
+var server = app.listen(port, function() {
+    console.log('Listening on port %d', server.address().port);
+});
