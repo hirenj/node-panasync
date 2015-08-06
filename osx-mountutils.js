@@ -47,7 +47,7 @@ if (require('os').platform() !== 'darwin') {
 	  if (!isDevice && !fs.existsSync(path)) {
 	    return({"mounted": false, "error": "Path does not exist"});
 	  }
-	  var mtab = require('child_process').execSync('/sbin/mount').toString().split("\n");
+	  var mtab = require('runsync').exec('/sbin/mount').toString().split("\n");
 	  // Interate through and find the one we're looking for
 	  for (i in mtab) {
 	    var mountDetail = mtab[i].split(" ");

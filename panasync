@@ -69,7 +69,7 @@ camera.on('batchcomplete',function(idx) {
 
 camera.on('syncend',function() {
   console.log("Completed sync");
-})
+});
 
 
 camera.on('available',function(available) {
@@ -78,8 +78,9 @@ camera.on('available',function(available) {
 
 var nas_mounter = require('./nas_mounter');
 
-if (false && nconf.get('nas')) {
+if (nconf.get('nas')) {
   nas_mounter.autoMount(nconf.get('nas'),function(mounted) {
+    console.log("Got mounted status",mounted);
     camera.enabled = mounted;
   });
 } else {
