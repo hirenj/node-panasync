@@ -172,6 +172,9 @@ var filterPhotos = function(new_photos,total,callback) {
 
 var downloadPhotos = function(photos) {
   var self = this;
+
+  self.batches_remaining = photos.length;
+
   if (photos.length == 0) {
     self.emit('syncend');
     self.syncing = false;

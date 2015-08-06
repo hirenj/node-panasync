@@ -50,6 +50,7 @@ app.get('/status.json', function(req, res){
     'available' : camera.available,
     'enabled' : camera.enabled,
     'current' : camera.current,
+    'remaining' : camera.batches_remaining,
     'syncing' : camera.syncing,
     'current_complete' : camera.current_complete
   });
@@ -62,7 +63,7 @@ camera.enabled = false;
 camera.auto = true;
 
 camera.on('batchcomplete',function(idx) {
-  console.log("Finished batch ",idx);
+  console.log("Finished batch ",idx,"remaining",camera.batches_remaining);
   nconf.set('camera:latest',idx);
   nconf.save();
 });
