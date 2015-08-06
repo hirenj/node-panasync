@@ -72,7 +72,6 @@ camera.on('syncend',function() {
   console.log("Completed sync");
 });
 
-
 camera.on('available',function(available) {
   console.log("Camera availability is now ",available);
 });
