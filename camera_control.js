@@ -209,10 +209,10 @@ var downloadPhotos = function(photos) {
   .pipe(writer);
 
   writer.on('finish',function() {
+    self.current = null;
     fs.utimes(dst,timestamp,timestamp,function() {
       // Emit event saying this photo is done
       self.emit('complete',photo.index+"."+extension);
-      self.current = null;
       console.log("Done "+photo.index+"."+extension);
     });
     photos[0].extensions.shift();
