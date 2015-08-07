@@ -35,6 +35,12 @@ function get_body(data) {
   if (data.syncing) {
     return "Transferring "+data.current+" ("+data.current_complete+"%) "+data.remaining+" batches remaining";
   } else {
+    if (data.available) {
+      return "Camera now available";
+    }
+    if (data.enabled) {
+      return "Syncing enabled, we have storage";
+    }
     return "Not syncing";
   }
 };
@@ -51,8 +57,9 @@ self.addEventListener('push', function(event) {
   var tag = 'simple-push-demo-notification-tag';
 
   event.waitUntil(
-    get('/status.json').then(function(body) {
-      var data = JSON.parse(body);
+    fetch('/status.json').then(function(response) {
+      return response.json();
+    }).then(function(data) {
       return self.registration.showNotification(get_title(data), {
         body: get_body(data),
         icon: icon,
