@@ -3,6 +3,7 @@
 // "requires" used in this file ------------------------------------------------
 
 var path = require('path'), fs = require('fs');
+var https = require('https');
 var minimist = require('minimist');
 var express = require('express');
 var bodyParser = require('body-parser');
@@ -113,7 +114,12 @@ if (nconf.get('nas')) {
   camera.enabled = true;
 }
 
+var server_config = {
+  'key' : fs.readFileSync('certs/triage.pem'),
+ 'cert' : fs.readFileSync('certs/triage.crt')
+};
+
 // Fire up the server ----------------------------------------------------------
-var server = app.listen(port, function() {
+var server = https.createServer(server_config,app).listen(port, function() {
     console.log('Listening on port %d', server.address().port);
 });
