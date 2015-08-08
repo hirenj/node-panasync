@@ -116,7 +116,7 @@ if (nconf.get('nas')) {
 
 var server_config = {
   'key' : fs.readFileSync('certs/cert.key'),
- 'cert' : fs.readFileSync('certs/cert.crt'),
+ 'cert' : fs.readFileSync('certs/cert.pem'),
  'ca' : fs.readFileSync('certs/CA.crt')
 };
 
