@@ -115,8 +115,9 @@ if (nconf.get('nas')) {
 }
 
 var server_config = {
-  'key' : fs.readFileSync('certs/triage.pem'),
- 'cert' : fs.readFileSync('certs/triage.crt')
+  'key' : fs.readFileSync('certs/cert.key'),
+ 'cert' : fs.readFileSync('certs/cert.crt'),
+ 'ca' : fs.readFileSync('certs/CA.crt')
 };
 
 // Fire up the server ----------------------------------------------------------
