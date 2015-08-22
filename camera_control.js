@@ -128,6 +128,9 @@ var convert_items = function(urls) {
   var extensions = cleaned_urls.map(function(url) {
     return url.split('.')[1];
   }).filter(onlyUnique);
+  if (extensions.indexOf('MP4') >= 0) {
+    extensions = ['MP4'];
+  }
   return { 'index' : file_index, 'extensions': extensions};
 };
 
