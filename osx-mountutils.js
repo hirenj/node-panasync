@@ -23,7 +23,14 @@ if (require('os').platform() !== 'darwin') {
 		options = options || {};
 		options.noSudo = true;
 		options.umountPath = '/bin/umount -l';
-		return mountutils.umount.call(self,path,isDevice,options,callback);
+		var oldisMounted = mountutils.isMounted;
+		mountutils.isMounted = function() {
+			return {'mounted' : true};
+		};
+		return mountutils.umount.call(self,path,isDevice,options,function(status) {
+			mountutils.isMounted = oldisMounted;
+			callback(status);
+		});
 	};
 } else {
 	exports.mount = function(dev, path, options, callback) {
