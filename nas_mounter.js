@@ -42,6 +42,8 @@ var autoMount = function(config,callback) {
 			});
 		} else {
 			tryUnmounting(config.mount_path,function(ok) {
+				console.log("Unmounting result ",ok.OK);
+				console.log(ok);
 				callback(false);
 			});
 		}
