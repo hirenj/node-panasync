@@ -22,6 +22,7 @@ if (require('os').platform() !== 'darwin') {
 		var self = this;
 		options = options || {};
 		options.noSudo = true;
+		options.umountPath = '/bin/umount -l';
 		return mountutils.umount.call(self,path,isDevice,options,callback);
 	};
 } else {

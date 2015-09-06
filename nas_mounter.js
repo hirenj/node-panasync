@@ -23,12 +23,17 @@ var autoMount = function(config,callback) {
 			tryMounting(config.host,config.path,config.mount_path,config.username,config.password,function(ok) {
 				var result_func = arguments.callee;
 				if (! ok.OK) {
+					if (ok.error) {
+						console.log("Mounting problem ",ok.error);
+					}
 					tries += 1;
 					if (tries <= 5 && host_up) {
+						console.log("Waiting to try mounting again for try number "+tries);
 						setTimeout(function() {
 							tryMounting(config.host,config.path,config.mount_path,config.username,config.password,result_func);
 						},1000);
 					} else {
+						console.log("Giving up trying to mount after "+(tries-1)+" tries");
 						callback(false);
 					}
 				} else {
@@ -36,7 +41,7 @@ var autoMount = function(config,callback) {
 				}
 			});
 		} else {
-			tryUnmounting(config.mount_path,function(err,ok) {
+			tryUnmounting(config.mount_path,function(ok) {
 				callback(false);
 			});
 		}
