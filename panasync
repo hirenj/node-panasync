@@ -69,14 +69,29 @@ app.get('/status.json', function(req, res){
   });
 });
 
-var gcm = require('node-gcm');
+var push = require( 'pushover-notifications' );
+//var gcm = require('node-gcm');
+//var message = new gcm.Message();
+//var notifier = new gcm.Sender(nconf.get('gcm:api_key'));
 
-var message = new gcm.Message();
+var notifier = new push( {
+    token: nconf.get('pushover:token'),
+    // onerror: function(error) {},
+    // update_sounds: true // update the list of sounds every day - will
+    // prevent app from exiting.
+});
 
-var notifier = new gcm.Sender(nconf.get('gcm:api_key'));
-
-var notif = function() {
-  notifier.send(new gcm.Message(), nconf.get('gcm:client_ids'),function() {});
+var notif = function(message,priority) {
+  var msg = {
+    // These values correspond to the parameters detailed on https://pushover.net/api
+    // 'message' is required. All other values are optional.
+    message: message,   // required
+    priority: priority
+  };
+  nconf.get('pushover:client_ids').forEach(function(user) {
+    msg.user = user;
+    notifier.send(msg, function() {});
+  });
 };
 
 var Camera = require('./camera_control');
@@ -88,20 +103,20 @@ camera.auto = true;
 camera.on('batchcomplete',function(idx) {
   console.log("Finished batch ",idx,"remaining",camera.batches_remaining);
   camera.latest = idx;
-  notif();
+  notif("Batch complete, remaining "+camera.batches_remaining,-1);
   nconf.set('camera:latest',idx);
   nconf.save();
 });
 
 
 camera.on('syncend',function() {
-  notif();
+  notif("Completed sync",1);
   console.log("Completed sync");
 });
 
 camera.on('available',function(available) {
   console.log("Camera availability is now ",available);
-  notif();
+  notif(available? "Camera available" : "Camera not available",-1);
 });
 
 var nas_mounter = require('./nas_mounter');
@@ -110,7 +125,7 @@ if (nconf.get('nas')) {
   nas_mounter.autoMount(nconf.get('nas'),function(mounted) {
     console.log("Got mounted status",mounted);
     camera.enabled = mounted;
-    notif();
+    notif(mounted ? "Have NAS" : "NAS offline", -1);
   });
 } else {
   camera.enabled = true;
