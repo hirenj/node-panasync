@@ -10,6 +10,8 @@ COPY package*.json ./
 
 RUN npm install --only=production
 
+RUN mkdir /mnt/photos
+
 COPY . .
 
 CMD npm start
